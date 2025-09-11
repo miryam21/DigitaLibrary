@@ -1,0 +1,76 @@
+# ============================
+# Python
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ============================
+# Virtual environments
+# ============================
+venv/
+env/
+ENV/
+.venv/
+
+# ============================
+# Logs & Debug
+# ============================
+*.log
+*.pot
+*.mo
+*.pid
+*.seed
+*.cover
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# ============================
+# IDE / Editors
+# ============================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================
+# OS files
+# ============================
+.DS_Store
+Thumbs.db
+
+# ============================
+# Dataset / Local Data
+# ============================
+server/dataset/books.csv
+*.db
+*.sqlite3
+*.sqlite
+
+# ============================
+# Env files
+# ============================
+.env
+*.env
+
+# ============================
+# Jupyter
+# ============================
+.ipynb_checkpoints/
+
+# ============================
+# Other
+# ============================
+*.bak
+*.tmp
+*.old
