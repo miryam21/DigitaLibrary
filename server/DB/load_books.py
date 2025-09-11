@@ -21,7 +21,7 @@ def load_books_from_csv(limit=100):
     # 🗑️ מחיקת כל הנתונים מהטבלה
     cursor.execute("DELETE FROM books;")
     # 🔄 Reset של ה-ID (Identity)
-    cursor.execute("DBCC CHECKIDENT ('books', RESEED, 0);")
+    cursor.execute("DBCC CHECKIDENT ('books', RESEED, 1);")
     conn.commit()
     print("🗑️ All existing books deleted and ID reset.")
 
