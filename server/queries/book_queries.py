@@ -47,3 +47,14 @@ def delete_book(book_id):
     cursor.execute("DELETE FROM books WHERE id=?", (book_id,))
     conn.commit()
     return cursor.rowcount
+
+def search_books(query: str):
+    conn = get_connection()
+    cursor = conn.cursor()
+    like = f"%{query}%"
+    cursor.execute("""
+        SELECT id, title, author, year, pages, category, summary, cover_url
+        FROM books
+        WHERE title LIKE ? OR author LIKE ? OR category LIKE ?
+    """, (like, like, like))
+    return cursor.fetchall()

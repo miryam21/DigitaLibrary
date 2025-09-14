@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from services.book_service import (
-    get_books, get_book, add_book, edit_book, remove_book
+    get_books, get_book, add_book, edit_book, remove_book, search_books_service
 )
 from models.book import Book
 
@@ -23,9 +23,10 @@ def create_book(book: Book):
 
 @router.put("/{book_id}")
 def update_book(book_id: int, book: Book):
-    data = book.dict(exclude_unset=True)  # יתעלם מ-id אם המשתמש לא שלח
-    success = edit_book(book_id, Book(**data))
-    ...
+    success = edit_book(book_id, book)
+    if not success:
+        raise HTTPException(status_code=404, detail="Book not found or not updated")
+    return {"message": f"Book {book_id} updated successfully"}
 
 @router.delete("/{book_id}")
 def delete_book(book_id: int):
@@ -33,3 +34,7 @@ def delete_book(book_id: int):
     if not success:
         raise HTTPException(status_code=404, detail="Book not found")
     return {"message": f"Book {book_id} deleted successfully"}
+
+@router.get("/search/", response_model=list[Book])
+def search_books(q: str):
+    return search_books_service(q)

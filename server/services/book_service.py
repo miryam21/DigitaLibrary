@@ -1,6 +1,6 @@
 from queries.book_queries import (
     fetch_all_books, fetch_book_by_id,
-    insert_book, update_book, delete_book
+    insert_book, update_book, delete_book, search_books
 )
 from models.book import Book
 from events.event_store import save_event
@@ -9,14 +9,14 @@ def get_books(limit: int = 100):
     rows = fetch_all_books(limit)
     return [
         Book(
-            id=row.id,
-            title=row.title,
-            author=row.author,
-            year=row.year,
-            pages=row.pages,
-            category=row.category,
-            summary=row.summary,
-            cover_url=row.cover_url
+            id=row[0],
+            title=row[1],
+            author=row[2],
+            year=row[3],
+            pages=row[4],
+            category=row[5],
+            summary=row[6],
+            cover_url=row[7]
         )
         for row in rows
     ]
@@ -26,14 +26,14 @@ def get_book(book_id: int):
     if not row:
         return None
     return Book(
-        id=row.id,
-        title=row.title,
-        author=row.author,
-        year=row.year,
-        pages=row.pages,
-        category=row.category,
-        summary=row.summary,
-        cover_url=row.cover_url
+        id=row[0],
+        title=row[1],
+        author=row[2],
+        year=row[3],
+        pages=row[4],
+        category=row[5],
+        summary=row[6],
+        cover_url=row[7]
     )
 
 def add_book(book: Book):
@@ -61,3 +61,19 @@ def remove_book(book_id: int):
         save_event("BookDeleted", {"book_id": book_id})
         return True
     return False
+
+def search_books_service(query: str):
+    rows = search_books(query)
+    return [
+        Book(
+            id=row[0],
+            title=row[1],
+            author=row[2],
+            year=row[3],
+            pages=row[4],
+            category=row[5],
+            summary=row[6],
+            cover_url=row[7]
+        )
+        for row in rows
+    ]
