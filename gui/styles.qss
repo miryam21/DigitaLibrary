@@ -1,0 +1,73 @@
+/* ===== קונטיינר מרכזי (קארד) ===== */
+#FormContainer {
+    background: rgba(255, 255, 255, 0.9); /* שקיפות עדינה */
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 420px;
+    min-width: 280px;
+    margin: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+/* ===== כותרות ===== */
+#LoginTitle, #RegisterTitle {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ===== שדות טקסט ===== */
+#LoginInput, #RegisterInput {
+    padding: 10px 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 14px;
+    min-height: 32px;
+}
+
+#LoginInput:focus, #RegisterInput:focus {
+    border: 1.5px solid #3498db;
+    outline: none;
+    box-shadow: 0 0 4px rgba(52,152,219,0.3);
+}
+
+/* ===== כפתורים ===== */
+#LoginButton, #RegisterButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 16px;
+    border: none;
+    min-height: 36px;
+    transition: background-color 0.3s ease;
+}
+
+#LoginButton:hover, #RegisterButton:hover {
+    background-color: #2980b9;
+}
+
+/* ===== לינקים ===== */
+#LoginSwitchButton, #RegisterSwitchButton {
+    background: none;
+    border: none;
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#LoginSwitchButton:hover, #RegisterSwitchButton:hover {
+    color: #1e8449;
+    text-decoration: underline;
+}
+
+/* ===== תוויות ===== */
+QLabel {
+    font-size: 13px;
+    color: #333;
+}
+
