@@ -71,3 +71,28 @@ QLabel {
     color: #333;
 }
 
+#HomeTabs::pane {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+#HomeTabs::tab-bar {
+    alignment: left;
+}
+
+#HomeTabs::tab {
+    background: #ecf0f1;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-right: 4px;
+    font-weight: bold;
+}
+
+#HomeTabs::tab:selected {
+    background: #3498db;
+    color: white;
+    border: 1px solid #2980b9;
+}

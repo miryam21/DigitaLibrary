@@ -14,7 +14,7 @@ def seed_all():
 
     print("\n📚 Loading books from dataset...")
     # אפשר לשנות את limit לפי כמה ספרים את רוצה
-    load_books_from_csv(limit=20)
+    load_books_from_csv(limit=20 )
 
     print("\n📖 Adding loans...")
     insert_loans()

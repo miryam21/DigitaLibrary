@@ -1,0 +1,95 @@
+/* ===== HOME SCREEN BASE ===== */
+#HomeScreen {
+    background: transparent;
+}
+
+/* ===== TOPBAR ===== */
+#HomeScreen QLineEdit {
+    padding: 6px 10px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+}
+
+#HomeScreen QLineEdit:focus {
+    border: 1.5px solid #3498db;
+    box-shadow: 0 0 4px rgba(52,152,219,0.3);
+}
+
+#HomeScreen QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 6px 14px;
+    border: none;
+}
+
+#HomeScreen QPushButton:hover {
+    background-color: #2980b9;
+}
+
+#HomeScreen QPushButton:pressed {
+    background-color: #1c6fa5;
+}
+
+/* ===== SECTION TITLES ===== */
+#HomeScreen QLabel {
+    color: #2c3e50;
+}
+
+QLabel[sectionTitle="true"] {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+/* ===== SEE MORE BUTTON ===== */
+QPushButton#SeeMoreButton {
+    background-color: #27ae60;
+    border-radius: 14px;
+    font-size: 12px;
+    padding: 4px 10px;
+    font-weight: bold;
+    color: white;
+}
+
+QPushButton#SeeMoreButton:hover {
+    background-color: #1e8449;
+}
+
+/* ===== BOOK CARD ===== */
+QFrame#BookCard {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+QFrame#BookCard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* טקסט בכרטיס */
+QFrame#BookCard QLabel {
+    font-family: 'Segoe UI', sans-serif;
+    color: #2c3e50;
+}
+
+/* כפתור פרטים בכרטיס */
+#BookCard QPushButton {
+    background-color: #27ae60;
+    color: white;
+    border-radius: 12px;
+    font-size: 12px;
+    padding: 4px 10px;
+}
+
+#BookCard QPushButton:hover {
+    background-color: #1e8449;
+}

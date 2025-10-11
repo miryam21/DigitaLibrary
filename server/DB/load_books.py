@@ -51,15 +51,23 @@ def load_books_from_csv(limit=100):
             except:
                 pages = None
 
+        # דירוג ממוצע ⭐
+        average_rating = None
+        if not pd.isna(row.get("average_rating", None)):
+            try:
+                average_rating = float(row["average_rating"])
+            except:
+                average_rating = None
+
         # תיאור ותמונה
         summary = str(row.get("description", "")) if not pd.isna(row.get("description", "")) else None
         cover_url = str(row.get("thumbnail", "")) if not pd.isna(row.get("thumbnail", "")) else None
 
         try:
             cursor.execute("""
-                INSERT INTO books (title, author, year, pages, category, summary, cover_url)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, title, author, year, pages, category, summary, cover_url)
+                INSERT INTO books (title, author, year, pages, category, summary, cover_url, average_rating)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, title, author, year, pages, category, summary, cover_url, average_rating)
         except Exception as e:
             print("❌ Failed to insert row:", title, "-", e)
 

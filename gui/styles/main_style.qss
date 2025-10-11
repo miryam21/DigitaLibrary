@@ -1,0 +1,14 @@
+def load_styles(self):
+    styles_dir = os.path.join(os.path.dirname(__file__), "styles")
+    qss_files = ["common.qss", "login.qss", "register.qss", "home.qss"]
+
+    full_style = ""
+    for qss_file in qss_files:
+        path = os.path.join(styles_dir, qss_file)
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                full_style += f.read() + "\n"
+        except FileNotFoundError:
+            print(f"⚠️ {qss_file} not found")
+
+    self.setStyleSheet(full_style)

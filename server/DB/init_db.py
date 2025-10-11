@@ -23,6 +23,7 @@ def init_db():
     """)
 
     # יצירת טבלת books (כולל pages ו-category)
+    # יצירת טבלת books (כולל דירוג)
     cursor.execute("""
     CREATE TABLE books (
         id INT IDENTITY(1,1) PRIMARY KEY,
@@ -33,9 +34,11 @@ def init_db():
         category NVARCHAR(100),
         summary NVARCHAR(MAX),
         cover_url NVARCHAR(500),
+        average_rating FLOAT NULL,  -- ⭐ דירוג ממוצע
         created_at DATETIME DEFAULT GETDATE()
     )
     """)
+
 
     # יצירת טבלת loans
     cursor.execute("""
