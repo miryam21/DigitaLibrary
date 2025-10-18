@@ -11,12 +11,8 @@ router = APIRouter(prefix="/books", tags=["Books"])
 # === קודם נשים את ה־routes הספציפיים יותר ===
 
 @router.get("/search/", response_model=list[Book])
-def search_books(q: str):
-    """
-    חיפוש ספרים לפי מחרוזת חיפוש (title / author / category).
-    דוגמה: /books/search/?q=Gilead
-    """
-    return search_books_service(q)
+def search_books(q: str, sortBy: str):
+    return search_books_service(q, sortBy)
 
 
 @router.get("/recommended")

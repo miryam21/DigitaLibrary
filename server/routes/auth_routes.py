@@ -14,6 +14,7 @@ def register_user(user: UserCreate):
 @router.post("/login")
 def login_user(user: UserLogin):
     result = login(user)
+    print("user: ", user)
     if not result:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     return result

@@ -45,12 +45,12 @@ class HomePresenter:
             print("⚠️ No user_id found, skipping user books")
 
     # --- פעולות כפתורים ---
-    def on_search(self, query: str):
+    def on_search(self, query: str, sort_by: str):
         print(f"🔎 Search triggered | query='{query}'")
         if not query.strip():
             print("⚠️ Empty query, skipping search")
             return
-        books = self.book_service.search_books(query)
+        books = self.book_service.search_books(query, sort_by)
         print(f"✅ Search returned {len(books)} books")
         self.view.show_search_results(books)
 

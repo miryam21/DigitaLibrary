@@ -99,6 +99,15 @@ def get_books_by_category(category: str, limit: int = 5):
     """, (category,))
     return cursor.fetchall()
 
+def get_books_by_author(author: str, limit: int = 5):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(f"""
+        SELECT TOP {limit} id, title, author, year, pages, category, summary, cover_url, average_rating
+        FROM books
+        WHERE author = ?
+    """, (author,))
+    return cursor.fetchall()
 
 def get_user_books(user_id: int, limit: int = 10):
     conn = get_connection()

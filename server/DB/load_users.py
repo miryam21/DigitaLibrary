@@ -1,11 +1,15 @@
+from passlib.context import CryptContext
+
 from database import get_connection
 
 # רשימת משתמשים ראשוניים
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd = pwd_context.hash('1234567a')
 users = [
-    ("miri", "miri@example.com", "123456", "admin"),
-    ("roni", "roni@example.com", "123456", "user"),
-    ("shmuel", "shmuel@example.com", "123456", "user"),
-    ("shira", "shira@example.com", "123456", "user"),
+    ("miri", "miri@example.com", pwd, "admin"),
+    ("roni", "roni@example.com", pwd, "user"),
+    ("shmuel", "shmuel@example.com", pwd, "user"),
+    ("shira", "shira@example.com", pwd, "user"),
 ]
 
 def insert_users():

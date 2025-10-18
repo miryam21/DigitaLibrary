@@ -1,14 +1,14 @@
 import os
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QScrollArea, QFrame, QGridLayout, QTabWidget
+    QPushButton, QScrollArea, QFrame, QGridLayout, QTabWidget, QComboBox
 )
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QIcon
 
 # 👇 חיבור ל-Presenter
 from presenters.home_presenter import HomePresenter
-
+from screens.book_screen import BookScreen
 
 class HomeScreen(QWidget):
     def __init__(self, user_data, navigate_to):
@@ -17,6 +17,7 @@ class HomeScreen(QWidget):
         :param navigate_to: פונקציית ניווט מ-MainWindow (כדי שנוכל לחזור ל-login)
         """
         super().__init__()
+        self.book_screen = None
         self.user_data = user_data
         self.navigate_to = navigate_to
         self.setObjectName("HomeScreen")
@@ -37,15 +38,29 @@ class HomeScreen(QWidget):
         welcome = QLabel(f"Welcome, {username} ")
         welcome.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
 
+        self.combo_box = QComboBox()
+        self.combo_box.setPlaceholderText("Search by:")
+        self.combo_box.addItem("Book name")
+        self.combo_box.addItem("Author")
+        self.combo_box.addItem("Category")
+        self.combo_box.setStyleSheet("color: black")
+        self.combo_box.setMinimumWidth(50)
+        self.combo_box.setFixedHeight(32)
+        self.combo_box.setStyleSheet("background-color: white; color: black")
+        self.current_selected_CB = ""
+        self.combo_box.currentTextChanged.connect(self.setCurrentSelectedCB)
+
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText("Search for a book...")
+        self.search_input.setStyleSheet("color: black")
         self.search_input.setFixedHeight(32)
+        self.search_input.setMinimumWidth(200)
         self.search_input.addAction(QIcon(os.path.join(base_dir, "search.png")), QLineEdit.LeadingPosition)
 
         btn_search = QPushButton(" Search")
         btn_search.setFixedHeight(32)
         btn_search.setIcon(QIcon(os.path.join(base_dir, "search.png")))
-        btn_search.clicked.connect(lambda: self.presenter.on_search(self.search_input.text()))
+        btn_search.clicked.connect(lambda: self.presenter.on_search(self.search_input.text(), self.current_selected_CB))
 
         btn_logout = QPushButton(" Logout")
         btn_logout.setFixedHeight(32)
@@ -54,6 +69,7 @@ class HomeScreen(QWidget):
 
         topbar.addWidget(welcome)
         topbar.addStretch()
+        topbar.addWidget(self.combo_box)
         topbar.addWidget(self.search_input)
         topbar.addWidget(btn_search)
         topbar.addWidget(btn_logout)
@@ -105,6 +121,10 @@ class HomeScreen(QWidget):
         self.presenter.load_recommended_books()
         self.presenter.load_categories()
         self.presenter.load_user_books()
+
+    def setCurrentSelectedCB(self, value):
+        self.current_selected_CB = value
+
 
     # === פונקציות שה-Presenter קורא ===
     def show_recommended_books(self, books):
@@ -191,6 +211,15 @@ class HomeScreen(QWidget):
         btn_details = QPushButton(" Details")
         btn_details.setFixedHeight(28)
         btn_details.setIcon(QIcon(os.path.join(os.path.dirname(__file__), "..", "icons", "info.png")))
+        btn_details.clicked.connect(lambda: self.btn_show_book(book))
         layout.addWidget(btn_details)
 
         return card
+
+    def btn_show_book(self, book):
+        self.book_screen = BookScreen(book)
+        self.book_screen.finished.connect(self.on_book_borrowed)
+        self.book_screen.exec()
+    
+    def on_book_borrowed(self):
+        print("TODO: refresh book list!")

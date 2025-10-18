@@ -6,6 +6,8 @@ from queries.book_queries import (
 from models.book import Book
 from events.event_store import save_event
 
+from queries.book_queries import get_books_by_author
+
 
 def get_books(limit: int = 100):
     rows = fetch_all_books(limit)
@@ -59,8 +61,15 @@ def remove_book(book_id: int):
     return False
 
 
-def search_books_service(query: str):
-    rows = search_books(query)
+def search_books_service(query: str, sortBy: str):
+    rows = []
+    if sortBy == "Book name":
+        rows = search_books_service(query)
+    elif sortBy == "Author":
+        rows = get_books_by_author(query)
+    elif rows == "Category":
+        rows = get_books_by_category(query)
+
     return [
         Book(
             id=row[0], title=row[1], author=row[2],

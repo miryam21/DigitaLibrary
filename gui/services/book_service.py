@@ -75,13 +75,13 @@ class BookService:
             print("❌ Failed to fetch user books:", e)
         return []
 
-    def search_books(self, query: str):
+    def search_books(self, query: str, sort_by: str):
         """חיפוש ספרים לפי מילת חיפוש"""
         print(f"🔎 Searching books | query='{query}'")
         try:
             res = requests.get(
                 f"{API_URL}/books/search/",
-                params={"q": query},
+                params={"q": query, "sortBy": sort_by},
                 headers=self._headers()
             )
             print(f"   ↳ Response status: {res.status_code}")

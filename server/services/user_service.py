@@ -1,3 +1,5 @@
+import sys
+
 from queries.user_queries import (
     insert_user, get_user_by_email, get_user_by_id,
     get_all_users, update_user, delete_user

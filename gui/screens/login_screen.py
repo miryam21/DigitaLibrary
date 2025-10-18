@@ -26,13 +26,17 @@ class LoginScreen(QWidget):
         form_layout.addWidget(title)
 
         email_label = QLabel("Email Address")
+        email_label.setStyleSheet("color: black")
         self.email_input = QLineEdit()
+        self.email_input.setStyleSheet("color: black")
         self.email_input.setPlaceholderText("Enter your email")
         self.email_input.setObjectName("LoginInput")
         self.email_input.addAction(QIcon(os.path.join(base_dir, "email.png")), QLineEdit.LeadingPosition)
 
         password_label = QLabel("Password")
+        password_label.setStyleSheet("color: black")
         self.password_input = QLineEdit()
+        self.password_input.setStyleSheet("color: black")
         self.password_input.setPlaceholderText("Enter your password")
         self.password_input.setEchoMode(QLineEdit.Password)
         self.password_input.setObjectName("LoginInput")

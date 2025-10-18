@@ -11,6 +11,7 @@ class BooksScreen(QWidget):
         layout.addWidget(title)
 
         self.search_input = QLineEdit()
+        self.search_input.setStyleSheet("color: black")
         self.search_input.setPlaceholderText("חפש ספר לפי שם/מחבר/קטגוריה")
         layout.addWidget(self.search_input)
 
