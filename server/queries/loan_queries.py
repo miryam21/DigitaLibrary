@@ -1,13 +1,16 @@
 from DB.database import get_connection
-
-def insert_loan(user_id, book_id):
+from queries.user_queries import get_user_by_email
+def insert_loan(user_email, book_id, borrow_date):
+    user = get_user_by_email(user_email)
+    print("user: ", user)
+    user_id = user[0]
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO loans (user_id, book_id, status)
+        INSERT INTO loans (user_id, book_id, borrow_date, status)
         OUTPUT INSERTED.id
-        VALUES (?, ?, 'borrowed')
-    """, (user_id, book_id))
+        VALUES (?, ?, ?, 'borrowed')
+    """, (user_id, book_id, borrow_date))
     loan_id = cursor.fetchone()[0]
     conn.commit()
     return loan_id

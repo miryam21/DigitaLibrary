@@ -4,8 +4,8 @@ from queries.loan_queries import (
 from models.loan import LoanCreate, LoanUpdate
 
 def create_loan(data: LoanCreate):
-    loan_id = insert_loan(data.user_id, data.book_id)
-    return {"id": loan_id, "user_id": data.user_id, "book_id": data.book_id, "status": "borrowed"}
+    loan_id = insert_loan(data.user_email, data.book_id, data.borrow_date)
+    return {"id": loan_id, "user_id": data.user_email, "book_id": data.book_id, "status": "borrowed"}
 
 def list_loans():
     rows = get_all_loans()

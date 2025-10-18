@@ -1,6 +1,8 @@
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayout
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import Qt
+from services.loan_service import loan_book
+from services.auth_service import _session
 import os
 
 class BookScreen(QDialog):
@@ -65,7 +67,7 @@ class BookScreen(QDialog):
         # כפתור השאלת הספר
         borrow_button = QPushButton("Borrow Book")
         borrow_button.setStyleSheet("background-color: #4CAF50; color: white; font-size: 14px; padding: 10px;")
-        borrow_button.clicked.connect(self.borrow_book)
+        borrow_button.clicked.connect(self.loan_book)
         layout.addWidget(borrow_button)
 
         # הגדרות חלון
@@ -75,7 +77,10 @@ class BookScreen(QDialog):
         self.setLayout(layout)
         self.setFixedSize(400, 600)
 
-    def borrow_book(self):
+    def loan_book(self):
         # כאן תוכל להוסיף את הלוגיקה של השאלת הספר
         print(f"Book '{self.book['title']}' borrowed successfully!")
+        print(_session)
+        loan_book(_session['user'], self.book['id'])
         self.accept()  # סוגר את ה-dialog אחרי השאלה
+

@@ -15,7 +15,7 @@ def insert_user(username, email, password_hash, role="user"):
 def get_user_by_email(email):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, username, email, password_hash, role, created_at FROM users WHERE email=?", (email,))
+    cursor.execute("SELECT * FROM users WHERE email=?", (email,))
     return cursor.fetchone()
 
 def get_user_by_id(user_id):

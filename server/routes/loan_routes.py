@@ -9,6 +9,7 @@ router = APIRouter(prefix="/loans", tags=["Loans"])
 # --- יצירת השאלה חדשה ---
 @router.post("/")
 def create_loan_route(data: LoanCreate):
+    print("data: ", data)
     return create_loan(data)
 
 # --- כל ההשאלות ---
